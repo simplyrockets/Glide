@@ -1,4 +1,4 @@
-import React, { Component, lazy, Suspense } from 'react';
+import React, { Component } from 'react';
 
 class GettingStarted extends Component {
   constructor(props) {

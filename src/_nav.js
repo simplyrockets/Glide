@@ -3,7 +3,7 @@ export default {
     {
       name: 'Getting Started',
       url: 'getting-started',
-      icon: 'icon-speedometer'
+      icon: 'icon-home'
     },
     {
       name: 'Dashboard',
