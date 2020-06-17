@@ -1,24 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { Navigation } from './Navigation';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-const App = () => (
-  <div className="App">
-    <header className="App-header">
-      <img src={logo} className="App-logo" alt="logo" />
-      <p>
-        Edit <code>src/App.tsx</code> and save to reload.
-      </p>
-      <a
-        className="App-link"
-        href="https://reactjs.org"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Learn React
-      </a>
-    </header>
-  </div>
+import { Home } from './Home';
+import { LaunchPad } from './LaunchPad/LaunchPad';
+import { Rocket } from './Rocket/Rocket';
+
+export const App = () => (
+  <Router>
+    <main>
+      <nav>
+        <Navigation />
+      </nav>
+    </main>
+
+    <Switch>
+      <Route path="/" exact component={Home} />
+      <Route path="/launchpad" component={LaunchPad} />
+      <Route path="/rocket" component={Rocket} />
+      <Route render={() => <h1>404: page not found</h1>} />
+    </Switch>
+  </Router>
 );
-
-export default App;
