@@ -20,13 +20,11 @@ export class Navigation extends React.PureComponent<NavigationProps> {
       <Navbar className={Classes.DARK}>
         <NavbarGroup align={Alignment.LEFT}>
           <NavbarHeading>
-            <AnchorButton href="/" className="bp3-minimal" icon={<img src={glide} width={16} alt="Glide" />} text="Glide">
-
-              </AnchorButton>
+            <AnchorButton href="/" minimal icon={<img src={glide} width={16} alt="Glide" />} text="Glide" />
           </NavbarHeading>
           <NavbarDivider />
-          <AnchorButton href="/launchpad" className="bp3-minimal" icon={<img src={launchpad} width={16} alt="Launch Pad" />} text="Launch Pad"  />
-          <AnchorButton href="/rocket" className="bp3-minimal" icon={<img src={rocket} width={16} alt="Rocket" />} text="Rocket" />
+          <AnchorButton href="/launchpad" minimal icon={<img src={launchpad} width={16} alt="Launch Pad" />} text="Launch Pad"  />
+          <AnchorButton href="/rocket" minimal icon={<img src={rocket} width={16} alt="Rocket" />} text="Rocket" />
         </NavbarGroup>
       </Navbar>
     </>
