@@ -25,7 +25,7 @@ export const LaunchPad = () => {
           <NavbarGroup align={Alignment.LEFT}>
             <AnchorButton
               href={`${url}/telemetry`}
-              className="bp3-minimal"
+              minimal
               icon={IconNames.PULSE}
               text="Telemetry"
             />
