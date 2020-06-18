@@ -7,8 +7,6 @@ export const Telemetry = () => <>
       icon={IconNames.ISSUE}
       title="Not connected to launch pad"
       description="Please establish connection first."
-      action={<>
-        <Button text="Connect" intent="primary" large rightIcon={IconNames.CELL_TOWER} />
-      </>}
+      action={<Button text="Connect" intent="primary" large rightIcon={IconNames.CELL_TOWER} />}
   />
 </>;
