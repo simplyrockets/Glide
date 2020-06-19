@@ -18,7 +18,7 @@ export class Navigation extends React.PureComponent<NavigationProps> {
   public render() {
     return <>
       <Navbar className={Classes.DARK}>
-        <NavbarGroup align={Alignment.LEFT}>
+        <NavbarGroup>
           <NavbarHeading>
             <AnchorButton href="/" minimal icon={<img src={glide} width={16} alt="Glide" />} text="Glide" />
           </NavbarHeading>

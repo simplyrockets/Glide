@@ -22,7 +22,7 @@ export const LaunchPad = () => {
     <>
       <Router>
         <Navbar>
-          <NavbarGroup align={Alignment.LEFT}>
+          <NavbarGroup>
             <AnchorButton
               href={`${url}/telemetry`}
               minimal
