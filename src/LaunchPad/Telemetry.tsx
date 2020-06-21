@@ -9,7 +9,7 @@ export const Telemetry = () => (
       icon={IconNames.ISSUE}
       title="Not connected to launch pad"
       description="Please establish connection first."
-      action={ <ConnectionManager onSave={(endpoint) => {}} /> }
+      action={<ConnectionManager onSave={(endpoint) => {}} />}
     />
   </>
 );
