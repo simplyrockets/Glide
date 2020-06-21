@@ -28,7 +28,7 @@ export const ConnectionManager = (props: IProps) => {
       <div className={Classes.DIALOG_BODY}>
         <FormGroup
           helperText=""
-          label="Server Endpoint"
+          label="Glide Relay Endpoint"
           labelFor="text-input"
           labelInfo="(required)"
         >
