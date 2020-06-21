@@ -4,8 +4,8 @@ import { Navigation } from './Navigation';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import { Home } from './Home';
-import { LaunchPad } from './launchpad/LaunchPad';
-import { Rocket } from './rocket/Rocket';
+import { LaunchPad } from './LaunchPad/LaunchPad';
+import { Rocket } from './Rocket/Rocket';
 
 export const App = () => (
   <Router>
