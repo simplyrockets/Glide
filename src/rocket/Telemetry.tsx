@@ -1,7 +1,7 @@
 import React from 'react';
 import { NonIdealState } from '@blueprintjs/core';
 import { IconNames } from '@blueprintjs/icons';
-import { ConnectionManager } from 'ConnectionManager';
+import ConnectionManager from 'ConnectionManager';
 
 export default function Telemetry() {
   return <>

@@ -7,7 +7,7 @@ export interface IProps {
   onSave: (endpoint: string) => void;
 }
 
-export function ConnectionManager(props: IProps) {
+export default function ConnectionManager(props: IProps) {
   const [endpoint, setEndpoint] = useState<string>("");
   const [isOpen, setIsOpen] = useState<boolean>(false);
 

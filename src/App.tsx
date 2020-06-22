@@ -1,4 +1,5 @@
 import React from 'react';
+import 'react-mosaic-component/react-mosaic-component.css';
 import './App.css';
 import { Navigation } from './Navigation';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
