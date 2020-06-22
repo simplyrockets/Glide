@@ -7,7 +7,7 @@ export interface IProps {
   onSave: (endpoint: string) => void;
 }
 
-export const ConnectionManager = (props: IProps) => {
+export function ConnectionManager(props: IProps) {
   const [endpoint, setEndpoint] = useState<string>("");
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -16,7 +16,7 @@ export const ConnectionManager = (props: IProps) => {
     props.onSave(endpoint);
   }
 
-  return (<>
+  return <>
     <Button
       text="Connect"
       intent="primary"
@@ -52,5 +52,5 @@ export const ConnectionManager = (props: IProps) => {
         </div>
       </div>
     </Dialog>
-  </>)
-};
+  </>
+}

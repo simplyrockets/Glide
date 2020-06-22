@@ -12,10 +12,10 @@ import {
   Switch,
   useRouteMatch,
 } from "react-router-dom";
-import { Telemetry } from "./Telemetry";
-import { ConnectionStatus } from "../ConnectionStatus";
+import Telemetry from "./Telemetry";
+import ConnectionStatus from "../ConnectionStatus";
 
-export const LaunchPad = () => {
+export default function LaunchPad() {
   let { path, url } = useRouteMatch();
 
   return (
@@ -42,4 +42,4 @@ export const LaunchPad = () => {
       </Router>
     </>
   );
-};
+}

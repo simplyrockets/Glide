@@ -3,13 +3,13 @@ import './App.css';
 import { Navigation } from './Navigation';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import { Home } from './Home';
-import { LaunchPad } from './launchpad/LaunchPad';
-import { Rocket } from './rocket/Rocket';
-import { LogAnalysis } from './analysis/LogAnalysis';
+import Home from './Home';
+import LaunchPad from './launchpad/LaunchPad';
+import Rocket from './rocket/Rocket';
+import LogAnalysis from './analysis/LogAnalysis';
 
-export const App = () => (
-  <Router>
+export default function App() {
+  return <Router>
     <main>
       <nav>
         <Navigation />
@@ -24,4 +24,4 @@ export const App = () => (
       <Route render={() => <h1>404: page not found</h1>} />
     </Switch>
   </Router>
-);
+}

@@ -11,8 +11,8 @@ export class ConnectionState {
   connected: boolean = false;
 }
 
-export const ConnectionStatus = (props: ConnectionState) => (
-  <>
+export default function ConnectionStatus(props: ConnectionState) {
+  return <>
     {props.connected ? (
       <>
         <Popover
@@ -40,4 +40,4 @@ export const ConnectionStatus = (props: ConnectionState) => (
       />
     )}
   </>
-);
+}

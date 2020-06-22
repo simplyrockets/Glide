@@ -2,7 +2,7 @@ import React from 'react';
 import { NonIdealState, Button } from '@blueprintjs/core';
 import { IconNames } from '@blueprintjs/icons';
 
-export const LogAnalysis = () => {
+export default function LogAnalysis() {
   return <>
     <NonIdealState
       icon={IconNames.CLOUD_UPLOAD}
@@ -11,4 +11,4 @@ export const LogAnalysis = () => {
       action={<Button text="Upload" intent="primary" />}
     />
   </>;
-};
+}

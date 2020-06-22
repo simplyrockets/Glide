@@ -7,9 +7,9 @@ import {
   Switch,
   useRouteMatch,
 } from "react-router-dom";
-import { Telemetry } from "./Telemetry";
+import Telemetry from "./Telemetry";
 
-export const Rocket = () => {
+export default function Rocket() {
   let { path, url } = useRouteMatch();
 
   return (
@@ -33,4 +33,4 @@ export const Rocket = () => {
       </Router>
     </>
   );
-};
+}
