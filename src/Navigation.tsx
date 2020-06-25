@@ -8,6 +8,7 @@ import {
 import glide from "./Icons/glide.svg";
 import { IconNames } from "@blueprintjs/icons";
 import GlobalHelp from "Components/GlobalHelp";
+import SpinningLoadingIcon from "core/Components/SpinningLoadingIcon";
 
 export default function Navigation() {
   return <>
@@ -29,6 +30,7 @@ export default function Navigation() {
         <GlobalHelp />
         <AnchorButton icon={IconNames.LAYOUT_GRID} minimal />
         <AnchorButton icon={IconNames.OFFLINE} minimal />
+        <SpinningLoadingIcon />
       </Navbar.Group>
 
     </Navbar>
