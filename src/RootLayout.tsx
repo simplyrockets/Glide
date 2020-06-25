@@ -1,13 +1,12 @@
 import React from "react";
-import { NonIdealState } from "@blueprintjs/core";
 import { IconNames } from "@blueprintjs/icons";
-import ConnectionManager from "../ConnectionManager";
 import { Mosaic, MosaicWindow } from "react-mosaic-component";
-import 'react-mosaic-component/react-mosaic-component.css'
+import { NonIdealState } from "@blueprintjs/core";
+import ConnectionManager from "ConnectionManager";
 
 export type ViewId = 'a' | 'b' | 'c' | 'new';
 
-export default function Telemetry() {
+export default function RootLayout() {
 
   const TITLE_MAP: Record<ViewId, string> = {
     a: 'Left Window',
@@ -21,8 +20,7 @@ export default function Telemetry() {
       {false ?
       <NonIdealState
         icon={IconNames.ISSUE}
-        title="Not connected to launch pad"
-        description="Please establish connection first."
+        title="Not connected to ddddlaunch pad"
         action={<ConnectionManager onSave={(endpoint) => {}} />}
       />
         :
@@ -33,6 +31,7 @@ export default function Telemetry() {
               <h1>{TITLE_MAP[id]}</h1>
             </MosaicWindow>
           )}
+          zeroStateView={<></>}
           initialValue={{
             direction: "row",
             first: 'a',

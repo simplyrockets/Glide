@@ -2,29 +2,35 @@ import React from "react";
 import {
   Classes,
   Navbar,
-  NavbarGroup,
-  NavbarHeading,
-  NavbarDivider,
-  AnchorButton
+  AnchorButton,
+  Alignment,
 } from "@blueprintjs/core";
-import glide from './Icons/glide.svg';
-import rocket from './Icons/rocket.svg';
-import launchpad from './Icons/launchpad.svg';
+import glide from "./Icons/glide.svg";
 import { IconNames } from "@blueprintjs/icons";
+import GlobalHelp from "Components/GlobalHelp";
 
-export function Navigation() {
+export default function Navigation() {
   return <>
     <Navbar className={Classes.DARK}>
-      <NavbarGroup>
-        <NavbarHeading>
-          <AnchorButton href="/" minimal icon={<img src={glide} width={16} alt="Glide" />} text="Glide" />
-        </NavbarHeading>
-        <NavbarDivider />
-        <AnchorButton href="/launchpad" minimal icon={<img src={launchpad} width={16} alt="Launch Pad" />} text="Launch Pad"  />
-        <AnchorButton href="/rocket" minimal icon={<img src={rocket} width={16} alt="Rocket" />} text="Rocket" />
-        <NavbarDivider />
-        <AnchorButton href="/log-analysis" minimal icon={IconNames.OFFLINE} text="Log Analysis" />
-      </NavbarGroup>
+
+      <Navbar.Group>
+        <Navbar.Heading>
+          <AnchorButton
+            href="/"
+            minimal
+            icon={<img src={glide} width={16} alt="Glide" />}
+            text="Glide"
+          />
+        </Navbar.Heading>
+        <Navbar.Divider />
+      </Navbar.Group>
+
+      <Navbar.Group align={Alignment.RIGHT}>
+        <GlobalHelp />
+        <AnchorButton icon={IconNames.LAYOUT_GRID} minimal />
+        <AnchorButton icon={IconNames.OFFLINE} minimal />
+      </Navbar.Group>
+
     </Navbar>
   </>
 }

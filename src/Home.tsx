@@ -1,13 +1,12 @@
-import React from 'react';
-import { NonIdealState } from '@blueprintjs/core';
-import glide from './Icons/glide.svg';
+import React from "react";
+import Navigation from "Navigation";
+import RootLayout from "RootLayout";
+import Timeline from "Timeline";
 
 export default function Home() {
   return <>
-    <NonIdealState icon={
-      <img src={glide} width={36} alt="Glide" />
-    }
-    title="Glide"
-    description="Visualization and analysis toolkit for realtime sensory and telemetry data" />
+    <Navigation />
+    <RootLayout />
+    <Timeline />
   </>
 }
