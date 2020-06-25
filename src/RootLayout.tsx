@@ -1,6 +1,6 @@
 import React from "react";
 import { IconNames } from "@blueprintjs/icons";
-import { Mosaic, MosaicWindow } from "react-mosaic-component";
+import { Mosaic, MosaicWindow, MosaicZeroState } from "react-mosaic-component";
 import { NonIdealState } from "@blueprintjs/core";
 import ConnectionManager from "ConnectionManager";
 
@@ -15,36 +15,36 @@ export default function RootLayout() {
     new: 'New Window'
   };
 
-  return (
-    <>
-      {false ?
-      <NonIdealState
-        icon={IconNames.ISSUE}
-        title="Not connected to ddddlaunch pad"
-        action={<ConnectionManager onSave={(endpoint) => {}} />}
+  const createNode = () => { return 0; }
+
+  return <>
+    {false ?
+    <NonIdealState
+      icon={IconNames.ISSUE}
+      title="Not connected to Glide Relay"
+      action={<ConnectionManager onSave={(endpoint) => {}} />}
+    />
+      :
+    <div style={{ height: '100%' }}>
+      <Mosaic<ViewId>
+        renderTile={(id, path) => (
+          <MosaicWindow<ViewId> path={path} createNode={() => 'new'} title={TITLE_MAP[id]}>
+            <h1>{TITLE_MAP[id]}</h1>
+          </MosaicWindow>
+        )}
+        zeroStateView={<MosaicZeroState children={<></>} createNode={createNode} />}
+        initialValue={{
+          direction: "row",
+          first: 'a',
+          second: {
+            direction: 'column',
+            first: 'b',
+            second: 'c',
+          },
+          splitPercentage: 40,
+        }}
       />
-        :
-      <div style={{ height: '100%' }}>
-        <Mosaic<ViewId>
-          renderTile={(id, path) => (
-            <MosaicWindow<ViewId> path={path} createNode={() => 'new'} title={TITLE_MAP[id]}>
-              <h1>{TITLE_MAP[id]}</h1>
-            </MosaicWindow>
-          )}
-          zeroStateView={<></>}
-          initialValue={{
-            direction: "row",
-            first: 'a',
-            second: {
-              direction: 'column',
-              first: 'b',
-              second: 'c',
-            },
-            splitPercentage: 40,
-          }}
-        />
-      </div>
-      }
-    </>
-  );
+    </div>
+    }
+  </>
 }
