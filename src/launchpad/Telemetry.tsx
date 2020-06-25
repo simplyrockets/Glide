@@ -23,14 +23,15 @@ export default function Telemetry() {
 
   return (
     <>
+      {false ?
       <NonIdealState
         icon={IconNames.ISSUE}
         title="Not connected to launch pad"
         description="Please establish connection first."
         action={<ConnectionManager onSave={(endpoint) => {}} />}
       />
-
-      <div>
+        :
+      <div style={{ height: '100%' }}>
         <Mosaic<ViewId>
           renderTile={(id, path) => (
             <MosaicWindow<ViewId> path={path} createNode={() => 'new'} title={TITLE_MAP[id]}>
@@ -49,6 +50,7 @@ export default function Telemetry() {
           }}
         />
       </div>
+      }
     </>
   );
 }
