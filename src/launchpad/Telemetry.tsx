@@ -8,11 +8,6 @@ import 'react-mosaic-component/react-mosaic-component.css'
 export type ViewId = 'a' | 'b' | 'c' | 'new';
 
 export default function Telemetry() {
-  const ELEMENT_MAP: { [viewId: string]: JSX.Element } = {
-    a: <div>Left Window</div>,
-    b: <div>Top Right Window</div>,
-    c: <div>Bottom Right Window</div>,
-  };
 
   const TITLE_MAP: Record<ViewId, string> = {
     a: 'Left Window',
