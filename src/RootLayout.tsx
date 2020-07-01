@@ -1,21 +1,21 @@
 import React from "react";
 import { IconNames } from "@blueprintjs/icons";
 import { Mosaic, MosaicWindow, MosaicZeroState } from "react-mosaic-component";
-import { NonIdealState } from "@blueprintjs/core";
+import { NonIdealState, Classes } from "@blueprintjs/core";
 import ConnectionManager from "ConnectionManager";
-
-export type ViewId = 'a' | 'b' | 'c' | 'new';
+import { getClassNamespace } from "@blueprintjs/core/lib/esm/common/classes";
 
 export default function RootLayout() {
 
-  const TITLE_MAP: Record<ViewId, string> = {
-    a: 'Left Window',
-    b: 'Top Right Window',
-    c: 'Bottom Right Window',
-    new: 'New Window'
+  const TITLE_MAP: Record<number, string> = {
+    0: 'left window',
+    1: 'Top Right Window',
+    2: 'Bottom Right Window',
+    3: 'New Window'
   };
+  let windowCount: number = 3;
 
-  const createNode = () => { return 0; }
+  const createNode = () => { return windowCount++; }
 
   return <>
     {false ?
@@ -26,23 +26,24 @@ export default function RootLayout() {
     />
       :
     <div style={{ height: '100%' }}>
-      <Mosaic<ViewId>
+      <Mosaic<number>
         renderTile={(id, path) => (
-          <MosaicWindow<ViewId> path={path} createNode={() => 'new'} title={TITLE_MAP[id]}>
-            <h1>{TITLE_MAP[id]}</h1>
+          <MosaicWindow<number> path={path} createNode={createNode} title={TITLE_MAP[id]}>
+            <h1>{id}: {path}</h1>
           </MosaicWindow>
         )}
-        zeroStateView={<MosaicZeroState children={<></>} createNode={createNode} />}
+        zeroStateView={<MosaicZeroState createNode={createNode} />}
         initialValue={{
           direction: "row",
-          first: 'a',
+          first: 0,
           second: {
             direction: 'column',
-            first: 'b',
-            second: 'c',
+            first: 1,
+            second: 2,
           },
           splitPercentage: 40,
         }}
+        className="mosaic-blueprint-theme bp3-dark"
       />
     </div>
     }
