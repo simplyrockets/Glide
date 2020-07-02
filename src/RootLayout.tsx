@@ -1,51 +1,66 @@
-import React from "react";
-import { IconNames } from "@blueprintjs/icons";
+import React, { useCallback } from "react";
 import { Mosaic, MosaicWindow, MosaicZeroState } from "react-mosaic-component";
-import { NonIdealState, Classes } from "@blueprintjs/core";
-import ConnectionManager from "ConnectionManager";
-import { PanelId } from 'core/Components/Panel';
+import { getPanelTypeFromId, getPanelIdForType } from "core/utils/layout";
 
 export default function RootLayout() {
 
-  const TITLE_MAP: Record<PanelId, string> = {
-    0: 'left window',
-    1: 'Top Right Window',
-    2: 'Bottom Right Window',
-    3: 'New Window'
-  };
-  let windowCount: number = 3;
+  const createTile = useCallback(
+    (config: any) => {
+      const defaultPanelType = "stdout";
+      const type = config?.type || defaultPanelType;
+      const id = getPanelIdForType(type);
+      return id;
+    },
+    []
+  );
 
-  const createNode = () => { return windowCount++; }
+  const renderTile = useCallback(
+    (id: string | {}, path: any): JSX.Element => {
+      // `id` is usually a string. But when `layout` is empty, `id` will be an empty object, in which case we don't need to render Tile
+      if (!id || typeof id !== "string") {
+        return <></>;
+      }
+      const type = getPanelTypeFromId(id);
+      // const PanelComponent = PanelList.getComponentForType(type);
+      const PanelComponent: any = false;
 
-  return <>
-    {false ?
-    <NonIdealState
-      icon={IconNames.ISSUE}
-      title="Not connected to Glide Relay"
-      action={<ConnectionManager onSave={(endpoint) => {}} />}
-    />
-      :
-    <div style={{ height: '100%' }}>
-      <Mosaic<PanelId>
-        renderTile={(id, path) => (
-          <MosaicWindow<PanelId> path={path} createNode={createNode} title={TITLE_MAP[id]}>
-            <h1>{id}: {path}</h1>
+      if (!PanelComponent) {
+        // No component found for the given type, render the panel selector
+        return (
+          <MosaicWindow title={type} path={path} createNode={createTile}>
+            Unknown panel type: {type}.
           </MosaicWindow>
-        )}
-        zeroStateView={<MosaicZeroState createNode={createNode} />}
+        );
+      }
+
+      return (
+        <MosaicWindow title="" key={path} path={path} createNode={createTile}>
+          <PanelComponent />
+        </MosaicWindow>
+      )
+    },
+    [createTile]
+  );
+
+  // todo change to Flex
+  return <>
+    <div style={{ height: '100%' }}>
+      <Mosaic
+        renderTile={renderTile}
+        resize={{ minimumPaneSizePercentage: 2 }}
+        zeroStateView={<MosaicZeroState createNode={createTile} />}
         initialValue={{
           direction: "row",
-          first: 0,
+          first: "0",
           second: {
             direction: 'column',
-            first: 1,
-            second: 2,
+            first: "1",
+            second: "2",
           },
           splitPercentage: 40,
         }}
         className="mosaic-blueprint-theme bp3-dark"
       />
     </div>
-    }
   </>
 }

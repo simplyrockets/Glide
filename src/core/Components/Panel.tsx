@@ -4,7 +4,7 @@ class PanelProps {
 
 }
 
-export type PanelId = number;
+export type PanelId = string;
 
 export default function Panel() {
 
