@@ -3,11 +3,11 @@ import { IconNames } from "@blueprintjs/icons";
 import { Mosaic, MosaicWindow, MosaicZeroState } from "react-mosaic-component";
 import { NonIdealState, Classes } from "@blueprintjs/core";
 import ConnectionManager from "ConnectionManager";
-import { getClassNamespace } from "@blueprintjs/core/lib/esm/common/classes";
+import { PanelId } from 'core/Components/Panel';
 
 export default function RootLayout() {
 
-  const TITLE_MAP: Record<number, string> = {
+  const TITLE_MAP: Record<PanelId, string> = {
     0: 'left window',
     1: 'Top Right Window',
     2: 'Bottom Right Window',
@@ -26,9 +26,9 @@ export default function RootLayout() {
     />
       :
     <div style={{ height: '100%' }}>
-      <Mosaic<number>
+      <Mosaic<PanelId>
         renderTile={(id, path) => (
-          <MosaicWindow<number> path={path} createNode={createNode} title={TITLE_MAP[id]}>
+          <MosaicWindow<PanelId> path={path} createNode={createNode} title={TITLE_MAP[id]}>
             <h1>{id}: {path}</h1>
           </MosaicWindow>
         )}
