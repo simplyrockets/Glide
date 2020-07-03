@@ -1,5 +1,5 @@
 import cx from 'classnames';
-import * as React from 'react';
+import React from 'react';
 
 import styles from './Flex.module.scss';
 
@@ -24,12 +24,12 @@ interface IProps {
   // set to true to scroll content vertically
   scroll?: boolean,
   scrollX?: boolean,
-  children?: React.Node,
+  children?: React.ReactNode,
 
-  onClick?: (e: MouseEvent) => void,
-  onMouseEnter?: (e: MouseEvent) => void,
-  onMouseLeave?: (e: MouseEvent) => void,
-  onMouseMove?: (e: MouseEvent) => void
+  onClick?: (event: any) => void,
+  onMouseEnter?: (event: any) => void,
+  onMouseLeave?: (event: any) => void,
+  onMouseMove?: (event: any) => void
 };
 
 export default function Flex(props: IProps) {
@@ -58,7 +58,36 @@ export default function Flex(props: IProps) {
     throw new Error("Flex col and row are mutually exclusive");
   }
 
+  // toggle conditional classes based on props
   const conditionalClasses = {
+    [styles.col]: col,
+    [styles.reverse]: reverse,
+    [styles.center]: center,
+    [styles.start]: start,
+    [styles.end]: end,
+    [styles.wrap]: wrap,
+    [styles.clip]: clip,
+    [styles.scroll]: scroll,
+    [styles.scrollX]: scrollX,
+  };
+  const combinedClasses = cx(styles.flex, conditionalClasses, className);
 
-  }
+  // support both numeric and string (percentage) flex directives
+  const amount = typeof fixed === 'number' ? `${fixed}px` : fixed;
+  const flexStyle = amount ? { flex: `0 0 ${amount}` } : {};
+  // only copy combine flex & custom style if we were passed custom style
+  const fullStyle = style ? { ...flexStyle, ...style } : flexStyle;
+
+  return (
+    <div
+      className={combinedClasses}
+      style={fullStyle}
+      onClick={onClick}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      onMouseMove={onMouseMove}
+    >
+      {children}
+    </div>
+  );
 };

@@ -1,6 +1,8 @@
 import React, { useCallback } from "react";
 import { Mosaic, MosaicWindow, MosaicZeroState } from "react-mosaic-component";
 import { getPanelTypeFromId, getPanelIdForType } from "core/utils/layout";
+import Flex from "core/Components/Flex";
+import PanelToolbar from "core/Components/PanelToolbar";
 
 export default function RootLayout() {
 
@@ -27,7 +29,10 @@ export default function RootLayout() {
       if (!PanelComponent) {
         // No component found for the given type, render the panel selector
         return (
-          <MosaicWindow title={type} path={path} createNode={createTile}>
+          <MosaicWindow title={type} path={path} createNode={createTile} renderPreview={() => <div></div>}>
+            <Flex col center>
+              <PanelToolbar floating />
+            </Flex>
             Unknown panel type: {type}.
           </MosaicWindow>
         );
