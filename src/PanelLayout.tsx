@@ -4,7 +4,9 @@ import { getPanelTypeFromId, getPanelIdForType } from "core/utils/layout";
 import Flex from "core/Components/Flex";
 import PanelToolbar from "core/Components/PanelToolbar";
 
-export default function RootLayout() {
+import "./PanelLayout.scss";
+
+export default function PanelLayout() {
   const createTile = useCallback((config: any) => {
     const defaultPanelType = "stdout";
     const type = config?.type || defaultPanelType;
@@ -52,7 +54,7 @@ export default function RootLayout() {
   // todo change to Flex
   return (
     <>
-      <div style={{ height: "100%" }}>
+      <Flex center style={{ width: '100%', height: '100%' }}>
         <Mosaic
           renderTile={renderTile}
           resize={{ minimumPaneSizePercentage: 2 }}
@@ -69,7 +71,7 @@ export default function RootLayout() {
           }}
           className="mosaic-blueprint-theme bp3-dark"
         />
-      </div>
+      </Flex>
     </>
   );
 }
