@@ -1,8 +1,8 @@
 import React, { useCallback } from "react";
 import { Mosaic, MosaicWindow, MosaicZeroState } from "react-mosaic-component";
 import { getPanelTypeFromId, getPanelIdForType } from "core/utils/layout";
-import Flex from "core/Components/Flex";
-import PanelToolbar from "core/Components/PanelToolbar";
+import Flex from "core/components/Flex";
+import PanelToolbar from "core/components/PanelToolbar";
 
 import "./PanelLayout.scss";
 

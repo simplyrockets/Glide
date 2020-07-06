@@ -1,4 +1,4 @@
-import { PanelId } from "core/Components/Panel";
+import { PanelId } from "core/components/Panel";
 
 // given a panel type, create a unique id for a panel
 // with the type embedded within the id.

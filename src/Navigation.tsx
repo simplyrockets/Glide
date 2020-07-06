@@ -7,8 +7,8 @@ import {
 } from "@blueprintjs/core";
 import glide from "./Icons/glide.svg";
 import { IconNames } from "@blueprintjs/icons";
-import GlobalHelp from "Components/GlobalHelp";
-import SpinningLoadingIcon from "core/Components/SpinningLoadingIcon";
+import GlobalHelp from "components/GlobalHelp";
+import SpinningLoadingIcon from "core/components/SpinningLoadingIcon";
 
 export default function Navigation() {
   return <>
