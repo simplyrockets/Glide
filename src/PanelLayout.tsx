@@ -21,8 +21,7 @@ export default function PanelLayout() {
         return <></>;
       }
       const type = getPanelTypeFromId(id);
-      // const PanelComponent = PanelList.getComponentForType(type);
-      const PanelComponent: any = false;
+      const PanelComponent = PanelList.getComponentForType(type);
 
       if (!PanelComponent) {
         // No component found for the given type, render the panel selector
