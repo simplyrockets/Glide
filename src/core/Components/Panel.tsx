@@ -12,22 +12,19 @@ type Props<Config> = {
   saveConfig?: (config: Config) => void,
 };
 
-export type PanelId = string;
-
-export default function Panel<Config>(
-  PanelComponent: (
+export type PanelComponentType<Config> = (
     | ComponentType<{}>
     | ComponentType<{
       config?: Config,
       saveConfig?: SaveConfig<Config>,
     }>
-    | FunctionComponent<{}>
-    | FunctionComponent<{
-        config?: Config,
-        saveConfig?: SaveConfig<Config>,
-      }>
   ) &
-  PanelStatics<Config>
+  PanelStatics<Config>;
+
+export type PanelId = string;
+
+export default function Panel<Config>(
+  PanelComponent: PanelComponentType<Config>
 ): ComponentType<Props<Config>> {
   function ConnectedPanel(props: Props<Config>) {
 

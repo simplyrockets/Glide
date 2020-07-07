@@ -3,6 +3,7 @@ import { Mosaic, MosaicWindow, MosaicZeroState } from "react-mosaic-component";
 import { getPanelTypeFromId, getPanelIdForType } from "core/utils/layout";
 import Flex from "core/components/Flex";
 import PanelToolbar from "core/components/PanelToolbar";
+import { PanelList } from "core/panels/PanelList/PanelList";
 
 import "./PanelLayout.scss";
 
