@@ -1,8 +1,8 @@
-import React, { ComponentType, useMemo } from 'react';
+import React, { ComponentType, useMemo, FunctionComponent } from 'react';
 import { SaveConfig } from 'core/panels/panels';
 import Flex from './Flex';
 
-interface PanelStatics<Config> {
+export interface PanelStatics<Config> {
   panelType: string;
   defaultConfig: Config;
 }
@@ -21,7 +21,12 @@ export default function Panel<Config>(
       config?: Config,
       saveConfig?: SaveConfig<Config>,
     }>
-  ) & 
+    | FunctionComponent<{}>
+    | FunctionComponent<{
+        config?: Config,
+        saveConfig?: SaveConfig<Config>,
+      }>
+  ) &
   PanelStatics<Config>
 ): ComponentType<Props<Config>> {
   function ConnectedPanel(props: Props<Config>) {

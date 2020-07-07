@@ -4,7 +4,7 @@ import PanelToolbar from "core/components/PanelToolbar";
 
 import styled from "styled-components";
 import helpContent from "./Note.help.md";
-import Panel from "core/components/Panel";
+import Panel, { PanelStatics } from "core/components/Panel";
 import { SaveConfig } from "../panels";
 
 const STextArea = styled.textarea`
@@ -20,14 +20,15 @@ const STextArea = styled.textarea`
 `;
 
 type Config = { noteText: string };
-interface IProps {
-  config: Config;
-  saveConfig: SaveConfig<Config>;
-}
+type IProps = {
+  config?: Config,
+  saveConfig?: SaveConfig<Config>
+};
 
-export function Note({ config, saveConfig }: IProps): React.FC<IProps> {
+const Note: React.FunctionComponent<IProps> & PanelStatics<Config> = ({ config, saveConfig }: IProps) => {
   const onChanged = useCallback(
     (event: any) => {
+      if (saveConfig)
       saveConfig({ noteText: event.target.value });
     },
     [saveConfig]
@@ -38,7 +39,7 @@ export function Note({ config, saveConfig }: IProps): React.FC<IProps> {
       <PanelToolbar helpContent={helpContent} floating />
       <STextArea
         placeholder="Enter your notes here"
-        value={config.noteText}
+        value={config?.noteText ?? ""}
         onChange={onChanged}
       />
     </Flex>
