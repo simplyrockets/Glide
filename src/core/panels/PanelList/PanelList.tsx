@@ -1,7 +1,14 @@
 import React from 'react';
 import { flatten } from 'lodash';
-import { panelsByCategory as pbc } from '../../panelLoader';
+import { panelsByCategory as pbc, panelCategories } from '../../panelLoader';
 import { PanelComponentType } from 'core/components/Panel';
+import {
+  Tooltip,
+  Position,
+  MenuItem,
+  MenuDivider,
+  Menu
+} from '@blueprintjs/core';
 
 export type PanelListItem = {
   title?: string;
@@ -22,9 +29,40 @@ export class PanelList extends React.Component<{}, { searchQuery: string }> {
       )
     );
 
-    const panel = allPanels.find((item) => {
-      return item?.component?.panelType === type;
-    });
+    const panel = allPanels.find((item) => item?.component?.panelType === type);
     return panel && panel.component;
+  }
+
+  render() {
+    const categories = panelCategories();
+    const panelsByCategory = getPanelsByCategory();
+
+    return (
+      <Menu>
+        <div>
+          <div style={{ position: 'sticky', top: 0 }}>
+            <Tooltip content="click panel to add" position={Position.LEFT}>
+              <div
+                style={{ position: 'relative', pointerEvents: 'none', top: 45 }}
+              />
+            </Tooltip>
+          </div>
+          {categories.map(({ label, key }, categoryIdx) => {
+            let items = panelsByCategory[key];
+
+            return items.map(({ title, component }, panelIdx) => {
+              const panelType = component?.panelType;
+
+              return (
+                <div key={`${panelType}-${panelIdx}`}>
+                  {panelIdx === 0 && <MenuDivider title={label} />}
+                  <MenuItem text={title} />
+                </div>
+              );
+            });
+          })}
+        </div>
+      </Menu>
+    );
   }
 }

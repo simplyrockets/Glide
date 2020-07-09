@@ -5,11 +5,21 @@ export function panelsByCategory() {
   // const Note = require('src/core/panels/Note').default;
 
   const glide = [
-    // { title: "StdOut", component: StdOut },
+    { title: 'StdOut', component: () => {} },
     { title: 'Note', component: Note }
   ];
 
+  const debug = [{ title: 'Messages', component: Note }];
+
   return {
-    glide
+    glide,
+    debug
   };
+}
+
+export function panelCategories() {
+  return [
+    { label: 'Glide', key: 'glide' },
+    { label: 'Debug', key: 'debug' }
+  ];
 }
