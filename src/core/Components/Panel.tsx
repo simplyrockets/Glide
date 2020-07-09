@@ -1,6 +1,6 @@
-import React, { ComponentType, useMemo } from "react";
-import { SaveConfig } from "core/panels/panels";
-import Flex from "./Flex";
+import React, { ComponentType, useMemo } from 'react';
+import { SaveConfig } from 'core/panels/panels';
+import Flex from './Flex';
 
 export interface PanelStatics<Config> {
   panelType: string;
@@ -36,7 +36,7 @@ export default function Panel<Config>(
     );
 
     return (
-      <Flex style={{ border: "2px solid transparent" }} col>
+      <Flex style={{ border: '2px solid transparent' }} col>
         <PanelComponent
           config={panelComponentConfig}
           // saveConfig={saveCompleteConfig}
@@ -46,7 +46,7 @@ export default function Panel<Config>(
   }
 
   ConnectedPanel.displayName = `Panel(${
-    PanelComponent.displayName || PanelComponent.name || ""
+    PanelComponent.displayName || PanelComponent.name || ''
   })`;
 
   const MemoizedConnectedPanel: any = React.memo(ConnectedPanel);

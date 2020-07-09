@@ -1,15 +1,15 @@
-import React, { useCallback } from "react";
-import { Mosaic, MosaicWindow, MosaicZeroState } from "react-mosaic-component";
-import { getPanelTypeFromId, getPanelIdForType } from "core/utils/layout";
-import Flex from "core/components/Flex";
-import PanelToolbar from "core/components/PanelToolbar";
-import { PanelList } from "core/panels/PanelList/PanelList";
+import React, { useCallback } from 'react';
+import { Mosaic, MosaicWindow, MosaicZeroState } from 'react-mosaic-component';
+import { getPanelTypeFromId, getPanelIdForType } from 'core/utils/layout';
+import Flex from 'core/components/Flex';
+import PanelToolbar from 'core/components/PanelToolbar';
+import { PanelList } from 'core/panels/PanelList/PanelList';
 
-import "./PanelLayout.scss";
+import './PanelLayout.scss';
 
 export default function PanelLayout() {
   const createTile = useCallback((config: any) => {
-    const defaultPanelType = "Note";
+    const defaultPanelType = 'Note';
     const type = config?.type || defaultPanelType;
     const id = getPanelIdForType(type);
     return id;
@@ -18,7 +18,7 @@ export default function PanelLayout() {
   const renderTile = useCallback(
     (id: string | {}, path: any): JSX.Element => {
       // `id` is usually a string. But when `layout` is empty, `id` will be an empty object, in which case we don't need to render Tile
-      if (!id || typeof id !== "string") {
+      if (!id || typeof id !== 'string') {
         return <></>;
       }
       const type = getPanelTypeFromId(id);
@@ -45,7 +45,7 @@ export default function PanelLayout() {
 
       return (
         <MosaicWindow
-          title={PanelComponent?.displayName ?? "custom component"}
+          title={PanelComponent?.displayName ?? 'custom component'}
           key={path}
           path={path}
           createNode={createTile}
@@ -61,20 +61,20 @@ export default function PanelLayout() {
   // todo change to Flex
   return (
     <>
-      <Flex center style={{ width: "100%", height: "100%" }}>
+      <Flex center style={{ width: '100%', height: '100%' }}>
         <Mosaic
           renderTile={renderTile}
           resize={{ minimumPaneSizePercentage: 2 }}
           zeroStateView={<MosaicZeroState createNode={createTile} />}
           initialValue={{
-            direction: "row",
-            first: "0",
+            direction: 'row',
+            first: '0',
             second: {
-              direction: "column",
-              first: "1",
-              second: "2",
+              direction: 'column',
+              first: '1',
+              second: '2'
             },
-            splitPercentage: 40,
+            splitPercentage: 40
           }}
           className="mosaic-blueprint-theme bp3-dark"
         />

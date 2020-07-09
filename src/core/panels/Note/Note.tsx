@@ -1,11 +1,11 @@
-import React, { useCallback } from "react";
-import Flex from "core/components/Flex";
-import PanelToolbar from "core/components/PanelToolbar";
+import React, { useCallback } from 'react';
+import Flex from 'core/components/Flex';
+import PanelToolbar from 'core/components/PanelToolbar';
 
-import styled from "styled-components";
-import helpContent from "./Note.help.md";
-import Panel, { PanelStatics } from "core/components/Panel";
-import { SaveConfig } from "../panels";
+import styled from 'styled-components';
+import helpContent from './Note.help.md';
+import Panel, { PanelStatics } from 'core/components/Panel';
+import { SaveConfig } from '../panels';
 
 const STextArea = styled.textarea`
   width: 100%;
@@ -21,31 +21,33 @@ const STextArea = styled.textarea`
 
 type Config = { noteText: string };
 type IProps = {
-  config?: Config,
-  saveConfig?: SaveConfig<Config>
+  config?: Config;
+  saveConfig?: SaveConfig<Config>;
 };
 
-const Note: React.FunctionComponent<IProps> & PanelStatics<Config> = ({ config, saveConfig }: IProps) => {
+const Note: React.FunctionComponent<IProps> & PanelStatics<Config> = ({
+  config,
+  saveConfig
+}: IProps) => {
   const onChanged = useCallback(
     (event: any) => {
-      if (saveConfig)
-      saveConfig({ noteText: event.target.value });
+      if (saveConfig) saveConfig({ noteText: event.target.value });
     },
     [saveConfig]
   );
 
   return (
-    <Flex col style={{ height: "100%" }}>
+    <Flex col style={{ height: '100%' }}>
       <PanelToolbar helpContent={helpContent} floating />
       <STextArea
         placeholder="Enter your notes here"
-        value={config?.noteText ?? ""}
+        value={config?.noteText ?? ''}
         onChange={onChanged}
       />
     </Flex>
   );
-}
-Note.panelType = "Note";
-Note.defaultConfig = { noteText: "" };
+};
+Note.panelType = 'Note';
+Note.defaultConfig = { noteText: '' };
 
 export default Panel<Config>(Note);

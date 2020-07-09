@@ -6,7 +6,7 @@ export function panelsByCategory() {
 
   const glide = [
     // { title: "StdOut", component: StdOut },
-    { title: "Note", component: Note },
+    { title: 'Note', component: Note }
   ];
 
   return {
