@@ -1,4 +1,4 @@
-import { PanelId } from "core/components/Panel";
+import { PanelId } from 'core/components/Panel';
 
 // given a panel type, create a unique id for a panel
 // with the type embedded within the id.
@@ -12,5 +12,5 @@ export function getPanelIdForType(type: string): PanelId {
 }
 
 export function getPanelTypeFromId(id: PanelId): string {
-  return id.split("!")[0];
+  return id.split('!')[0];
 }
