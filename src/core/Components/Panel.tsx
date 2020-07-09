@@ -12,14 +12,13 @@ type Props<Config> = {
   saveConfig?: (config: Config) => void;
 };
 
-export type PanelComponentType<Config> = (
-  | ComponentType<{}>
-  | ComponentType<{
+export type PanelComponentType<Config> =
+  | (ComponentType<{}> & PanelStatics<Config>)
+  | (ComponentType<{
       config?: Config;
       saveConfig?: SaveConfig<Config>;
-    }>
-) &
-  PanelStatics<Config>;
+    }> &
+      PanelStatics<Config>);
 
 export type PanelId = string;
 
