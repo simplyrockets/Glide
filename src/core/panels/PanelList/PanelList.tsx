@@ -10,7 +10,6 @@ export type PanelListItem = {
 
 function getPanelsByCategory(): { [category: string]: PanelListItem[] } {
   const panelsByCategory: any = pbc();
-
   return panelsByCategory;
 }
 
