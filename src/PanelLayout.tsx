@@ -9,7 +9,7 @@ import "./PanelLayout.scss";
 
 export default function PanelLayout() {
   const createTile = useCallback((config: any) => {
-    const defaultPanelType = "stdout";
+    const defaultPanelType = "Note";
     const type = config?.type || defaultPanelType;
     const id = getPanelIdForType(type);
     return id;
@@ -28,11 +28,12 @@ export default function PanelLayout() {
         // No component found for the given type, render the panel selector
         return (
           <MosaicWindow
+            key={path}
             title={type}
             path={path}
             createNode={createTile}
-            renderToolbar={() => <div></div>}
-            renderPreview={() => <div></div>}
+            // renderToolbar={() => <div></div>}
+            // renderPreview={(p) => <div>{p.title}</div>}
           >
             <Flex col center>
               <PanelToolbar floating />
@@ -43,7 +44,13 @@ export default function PanelLayout() {
       }
 
       return (
-        <MosaicWindow title="" key={path} path={path} createNode={createTile}>
+        <MosaicWindow
+          title={PanelComponent?.displayName ?? "custom component"}
+          key={path}
+          path={path}
+          createNode={createTile}
+          renderPreview={() => <div></div>}
+        >
           <PanelComponent />
         </MosaicWindow>
       );
@@ -54,7 +61,7 @@ export default function PanelLayout() {
   // todo change to Flex
   return (
     <>
-      <Flex center style={{ width: '100%', height: '100%' }}>
+      <Flex center style={{ width: "100%", height: "100%" }}>
         <Mosaic
           renderTile={renderTile}
           resize={{ minimumPaneSizePercentage: 2 }}

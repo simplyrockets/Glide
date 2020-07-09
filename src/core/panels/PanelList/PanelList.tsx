@@ -9,15 +9,19 @@ export type PanelListItem = {
 }
 
 function getPanelsByCategory(): { [category: string]: PanelListItem[] } {
-  return pbc();
+  const panelsByCategory: any = pbc();
+
+  return panelsByCategory;
 }
 
 export class PanelList extends React.Component<{}, { searchQuery: string }> {
-  static getComponentForType(type: string): any | void {
+  static getComponentForType(type: string): PanelComponentType<any> | void {
     const panelsByCategory = getPanelsByCategory();
     const allPanels = flatten(Object.keys(panelsByCategory).map((category) => panelsByCategory[category]));
 
-    const panel = allPanels.find((item) => item?.component?.panelType === type);
+    const panel = allPanels.find((item) => {
+      return item?.component?.panelType === type;
+    });
     return panel && panel.component;
   }
 }

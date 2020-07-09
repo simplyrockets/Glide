@@ -1,4 +1,3 @@
-import React from 'react';
 import Note from './panels/Note/Note';
 
 export function panelsByCategory() {

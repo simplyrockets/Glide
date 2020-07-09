@@ -43,7 +43,8 @@ $grey: #777;
 
   // we use custom toolbars
   .mosaic-window-toolbar {
-    display: none;
+    // display: none;
+    height: 28px;
   }
 
   .mosaic-window-title {
