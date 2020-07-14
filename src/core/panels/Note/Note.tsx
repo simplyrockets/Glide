@@ -20,15 +20,15 @@ const STextArea = styled.textarea`
 `;
 
 type Config = { noteText: string };
-type IProps = {
+type Props = {
   config?: Config;
   saveConfig?: SaveConfig<Config>;
 };
 
-const Note: React.FunctionComponent<IProps> & PanelStatics<Config> = ({
+const Note: React.FunctionComponent<Props> & PanelStatics<Config> = ({
   config,
   saveConfig
-}: IProps) => {
+}: Props) => {
   const onChanged = useCallback(
     (event: any) => {
       if (saveConfig) saveConfig({ noteText: event.target.value });
