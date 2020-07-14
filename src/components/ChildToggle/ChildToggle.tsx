@@ -1,7 +1,7 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import Flex from 'core/components/Flex';
 import { createPortal } from 'react-dom';
-// import styles from './ChildToggle.module.scss';
+import styles from './ChildToggle.module.scss';
 // import Flex from 'core/components/Flex';
 
 type Props = {
@@ -21,11 +21,22 @@ const ChildToggle = ({
   position,
   noPortal
 }: Props) => {
+  const [el, setEl] = useState<HTMLDivElement>();
+  const [floatingEl, setFloatingEl] = useState<HTMLDivElement>();
+
   function renderFloating() {
     if (!isOpen) {
       return;
     }
-    const el = useRef();
+
+    if (
+      !el ||
+      !el.firstElementChild ||
+      !el.firstElementChild.firstElementChild
+    ) {
+      return;
+    }
+
     // position menu relative to our children[0]
     const childEl = el.firstElementChild.firstElementChild;
     const childRect = childEl.getBoundingClientRect();
@@ -55,17 +66,14 @@ const ChildToggle = ({
       spacerSize = childRect.left + childRect.width - padding;
     }
 
-    if (!document.body) {
-      return null;
-    }
-
     const tree = (
-      <div ref={(el) => (floatingEl = el)}>
+      <div ref={(el) => setFloatingEl(el!)}>
         <Flex
           row
           reverse={position === 'left'}
           start={position !== 'above'}
           end={position === 'above'}
+          className={styles.childContainer}
           style={styleObj}
         >
           {/* shrinkable spacer allows child to have a default position but slide over when it would go offscreen */}
@@ -81,6 +89,7 @@ const ChildToggle = ({
   return (
     <div onClick={(event) => event.stopPropagation()}>
       <div
+        ref={(el) => setEl(el!)}
         onClick={(event) => {
           event.stopPropagation();
           event.preventDefault();
