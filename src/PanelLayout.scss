@@ -5,13 +5,7 @@
 //  You may not use this file except in compliance with the License.
 
 // this is based on https://github.com/palantir/react-mosaic/blob/master/styles/blueprint-theme.less
-// @import "~webviz-core/src/styles/colors.module.scss";
-$toolbar: #2d2c33;
-$divider: #333;
-$text-control: #aaa;
-$text-control-hover: #bbb;
-$text-disabled: #eee;
-$text-muted: #ddd;
+@import 'core/styles/colors.module.scss';
 $grey: #777;
 
 .mosaic {
