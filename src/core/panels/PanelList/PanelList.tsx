@@ -12,7 +12,7 @@ import {
 
 export type PanelListItem = {
   title?: string;
-  component?: PanelComponentType<any>;
+  component: PanelComponentType<any>;
 };
 
 function getPanelsByCategory(): { [category: string]: PanelListItem[] } {
@@ -20,7 +20,15 @@ function getPanelsByCategory(): { [category: string]: PanelListItem[] } {
   return panelsByCategory;
 }
 
-export class PanelList extends React.Component<{}, { searchQuery: string }> {
+export type PanelSelection = {
+  type: string;
+};
+
+type Props = {
+  onPanelSelect: (selection: PanelSelection) => void;
+};
+
+export class PanelList extends React.Component<Props, { searchQuery: string }> {
   static getComponentForType(type: string): PanelComponentType<any> | void {
     const panelsByCategory = getPanelsByCategory();
     const allPanels = flatten(
@@ -34,6 +42,7 @@ export class PanelList extends React.Component<{}, { searchQuery: string }> {
   }
 
   render() {
+    const { onPanelSelect } = this.props;
     const categories = panelCategories();
     const panelsByCategory = getPanelsByCategory();
 
@@ -51,12 +60,19 @@ export class PanelList extends React.Component<{}, { searchQuery: string }> {
             let items = panelsByCategory[key];
 
             return items.map(({ title, component }, panelIdx) => {
-              const panelType = component?.panelType;
+              const panelType = component.panelType;
 
               return (
                 <div key={`${panelType}-${panelIdx}`}>
                   {panelIdx === 0 && <MenuDivider title={label} />}
-                  <MenuItem text={title} />
+                  <MenuItem
+                    text={title}
+                    onClick={() => {
+                      onPanelSelect({
+                        type: panelType
+                      });
+                    }}
+                  />
                 </div>
               );
             });

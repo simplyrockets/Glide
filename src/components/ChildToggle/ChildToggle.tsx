@@ -1,8 +1,7 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import Flex from 'core/components/Flex';
 import { createPortal } from 'react-dom';
 import styles from './ChildToggle.module.scss';
-// import Flex from 'core/components/Flex';
 
 type Props = {
   isOpen: boolean;
@@ -22,7 +21,6 @@ const ChildToggle = ({
   noPortal
 }: Props) => {
   const [el, setEl] = useState<HTMLDivElement>();
-  const [floatingEl, setFloatingEl] = useState<HTMLDivElement>();
 
   function renderFloating() {
     if (!isOpen) {
@@ -67,7 +65,7 @@ const ChildToggle = ({
     }
 
     const tree = (
-      <div ref={(el) => setFloatingEl(el!)}>
+      <div>
         <Flex
           row
           reverse={position === 'left'}
