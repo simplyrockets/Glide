@@ -56,7 +56,7 @@ export class PanelList extends React.Component<Props, { searchQuery: string }> {
               />
             </Tooltip>
           </div>
-          {categories.map(({ label, key }, categoryIdx) => {
+          {categories.map(({ label, key }) => {
             let items = panelsByCategory[key];
 
             return items.map(({ title, component }, panelIdx) => {
