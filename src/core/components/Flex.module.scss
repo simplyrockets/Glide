@@ -1,0 +1,57 @@
+.flex {
+  display: flex;
+  flex-direction: row;
+  flex: 1 1 auto;
+}
+.flex.reverse {
+  flex-direction: row-reverse;
+}
+
+.clip {
+  overflow: hidden;
+}
+
+.col {
+  flex-direction: column;
+}
+.flex.col.reverse {
+  flex-direction: column-reverse;
+}
+
+.center {
+  align-items: center;
+  justify-content: center;
+}
+
+.start {
+  align-items: start;
+}
+
+.end {
+  align-items: flex-end;
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
+
+.scroll {
+  overflow-y: auto;
+}
+
+.flex::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.flex::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.flex::-webkit-scrollbar-thumb {
+  background: #666;
+}
+
+.scrollX {
+  overflow-x: auto;
+}

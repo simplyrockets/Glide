@@ -1,0 +1,37 @@
+@import './colors.module.scss';
+
+$padding: 8px;
+$text-size: 12px;
+$control-padding: $padding ($padding + 4px);
+$control-margin: 0 0.2em;
+
+%bold {
+  font-weight: bold;
+  letter-spacing: 0.4px;
+}
+
+%clearfix {
+  &:after {
+    content: ' ';
+    visibility: hidden;
+    display: block;
+    height: 0;
+    clear: both;
+  }
+}
+
+$sans-serif-font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+@mixin sans-serif {
+  font-family: $sans-serif-font;
+  font-feature-settings: 'tnum';
+}
+
+$monospace-font: 'Roboto Mono', Menlo, Inconsolata, 'Courier New', Courier,
+  monospace;
+@mixin monospace {
+  font-family: $monospace-font;
+}
+
+:export {
+  monospaceFont: $monospace-font;
+}

@@ -3,7 +3,7 @@ import React from 'react';
 
 import styles from './Flex.module.scss';
 
-interface IProps {
+interface Props {
   col?: boolean;
   row?: boolean;
   reverse?: boolean;
@@ -32,7 +32,7 @@ interface IProps {
   onMouseMove?: (event: any) => void;
 }
 
-export default function Flex(props: IProps) {
+export default function Flex(props: Props) {
   const {
     col,
     row,

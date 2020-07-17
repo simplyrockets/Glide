@@ -1,6 +1,7 @@
 import React from 'react';
-import 'react-mosaic-component/react-mosaic-component.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import 'react-mosaic-component/react-mosaic-component.css';
+import 'core/styles/global.scss';
 
 import Home from 'Home';
 
