@@ -1,5 +1,10 @@
 import React, { useCallback } from 'react';
-import { Mosaic, MosaicWindow, MosaicZeroState } from 'react-mosaic-component';
+import {
+  Mosaic,
+  MosaicWindow,
+  MosaicZeroState,
+  MosaicBranch
+} from 'react-mosaic-component';
 import { getPanelTypeFromId, getPanelIdForType } from 'core/utils/layout';
 import 'react-mosaic-component/react-mosaic-component.css';
 import Flex from 'core/components/Flex';
@@ -17,7 +22,7 @@ export default function PanelLayout() {
   }, []);
 
   const renderTile = useCallback(
-    (id: string | {}, path: any): JSX.Element => {
+    (id: string | {}, path: MosaicBranch[]): JSX.Element => {
       // `id` is usually a string. But when `layout` is empty, `id` will be an empty object, in which case we don't need to render Tile
       if (!id || typeof id !== 'string') {
         return <>id not of type 'string'.</>;
@@ -29,7 +34,7 @@ export default function PanelLayout() {
         // No component found for the given type, render the panel selector
         return (
           <MosaicWindow
-            key={path}
+            key={path.toString()}
             title={type}
             path={path}
             createNode={createTile}
@@ -47,7 +52,7 @@ export default function PanelLayout() {
       return (
         <MosaicWindow
           title={PanelComponent?.displayName ?? 'custom component'}
-          key={path}
+          key={path.toString()}
           path={path}
           createNode={createTile}
           renderPreview={() => <div></div>}
