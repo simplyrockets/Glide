@@ -20,7 +20,7 @@ export default function PanelLayout() {
     (id: string | {}, path: any): JSX.Element => {
       // `id` is usually a string. But when `layout` is empty, `id` will be an empty object, in which case we don't need to render Tile
       if (!id || typeof id !== 'string') {
-        return <></>;
+        return <>id not of type 'string'.</>;
       }
       const type = getPanelTypeFromId(id);
       const PanelComponent = PanelList.getComponentForType(type);
