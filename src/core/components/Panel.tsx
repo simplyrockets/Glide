@@ -1,6 +1,7 @@
 import React, { ComponentType, useMemo } from 'react';
 import { SaveConfig } from 'core/panels/panels';
 import Flex from './Flex';
+import ErrorBoundary from 'core/components/ErrorBoundary';
 
 export interface PanelStatics<Config> {
   panelType: string;
@@ -36,10 +37,12 @@ export default function Panel<Config>(
 
     return (
       <Flex style={{ border: '2px solid transparent' }} col>
-        <PanelComponent
-          config={panelComponentConfig}
-          // saveConfig={saveCompleteConfig}
-        />
+        <ErrorBoundary>
+          <PanelComponent
+            config={panelComponentConfig}
+            // saveConfig={saveCompleteConfig}
+          />
+        </ErrorBoundary>
       </Flex>
     );
   }
