@@ -6,11 +6,12 @@ import {
   MosaicBranch
 } from 'react-mosaic-component';
 import { getPanelTypeFromId, getPanelIdForType } from 'core/utils/layout';
-import 'react-mosaic-component/react-mosaic-component.css';
 import Flex from 'core/components/Flex';
 import PanelToolbar from 'core/components/PanelToolbar';
+import ErrorBoundary from 'core/components/ErrorBoundary';
 import { PanelList } from 'core/panels/PanelList/PanelList';
 
+import 'react-mosaic-component/react-mosaic-component.css';
 import './PanelLayout.scss';
 
 export default function PanelLayout() {
@@ -66,7 +67,7 @@ export default function PanelLayout() {
 
   // todo change to Flex
   return (
-    <>
+    <ErrorBoundary>
       <Flex center style={{ width: '100%', height: '100%' }}>
         <Mosaic
           renderTile={renderTile}
@@ -74,17 +75,17 @@ export default function PanelLayout() {
           zeroStateView={<MosaicZeroState createNode={createTile} />}
           initialValue={{
             direction: 'row',
-            first: '0',
+            first: 'Note!0',
             second: {
               direction: 'column',
-              first: '1',
-              second: '2'
+              first: 'Note!1',
+              second: 'Note!2'
             },
             splitPercentage: 40
           }}
           className="mosaic-blueprint-theme bp3-dark"
         />
       </Flex>
-    </>
+    </ErrorBoundary>
   );
 }
