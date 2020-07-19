@@ -1,7 +1,7 @@
 import React from 'react';
 import { flatten } from 'lodash';
 import { panelsByCategory as pbc, panelCategories } from '../../panelLoader';
-import { PanelComponentType } from 'core/components/Panel';
+import { PanelComponentType, PanelStatics } from 'core/components/Panel';
 import {
   Tooltip,
   Position,
@@ -29,7 +29,9 @@ type Props = {
 };
 
 export class PanelList extends React.Component<Props, { searchQuery: string }> {
-  static getComponentForType(type: string): PanelComponentType<any> | void {
+  static getComponentForType(
+    type: string
+  ): (PanelComponentType<any> & PanelStatics<any>) | void {
     const panelsByCategory = getPanelsByCategory();
     const allPanels = flatten(
       Object.keys(panelsByCategory).map(

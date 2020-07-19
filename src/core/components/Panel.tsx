@@ -2,6 +2,7 @@ import React, { ComponentType, useMemo } from 'react';
 import { SaveConfig } from 'core/panels/panels';
 import Flex from './Flex';
 import ErrorBoundary from 'core/components/ErrorBoundary';
+import { useRecoilState, atom } from 'recoil';
 
 export interface PanelStatics<Config> {
   panelType: string;
@@ -9,6 +10,7 @@ export interface PanelStatics<Config> {
 }
 
 type Props<Config> = {
+  childId?: string;
   config?: Config;
   saveConfig?: (config: Config) => void;
 };
@@ -18,6 +20,7 @@ export type PanelComponentType<Config> =
   | (ComponentType<{
       config?: Config;
       saveConfig?: SaveConfig<Config>;
+      isHovered?: boolean;
     }> &
       PanelStatics<Config>);
 
@@ -26,8 +29,23 @@ export type PanelId = string;
 export default function Panel<Config>(
   PanelComponent: PanelComponentType<Config>
 ): ComponentType<Props<Config>> {
-  function ConnectedPanel(props: Props<Config>) {
-    const { config: originalConfig } = props;
+  function ConnectedPanel({
+    childId,
+    config: originalConfig,
+    saveConfig
+  }: Props<Config>) {
+    const hovered = atom<boolean>({
+      key: `${childId}-hovered`,
+      default: false
+    });
+
+    const selected = atom<boolean>({
+      key: `${childId}-selected`,
+      default: false
+    });
+
+    const [isHovered, setIsHovered] = useRecoilState<boolean>(hovered);
+    const [isSelected, setIsSelected] = useRecoilState<boolean>(selected);
 
     const config = originalConfig || {};
     const panelComponentConfig = useMemo(
@@ -35,12 +53,46 @@ export default function Panel<Config>(
       [config]
     );
 
+    // Key bindings
+    const { onMouseEnter, onMouseLeave, onMouseMove } = useMemo(
+      () => ({
+        onMouseEnter: () => {
+          console.log('setting hovered to true');
+          setIsHovered(true);
+        },
+        onMouseLeave: () => setIsHovered(false),
+        onMouseMove: (e: any) => {
+          // if (e.metakey !== cmdkeypressed) {
+          //   setcmdkeypressed(e.metakey);
+          // }
+        }
+        // enterfullscreen: () => {
+        //   setfullscreen(true);
+        //   setFullScreenLocked(true);
+        // },
+        // exitFullScreen: () => {
+        //   setFullScreen(false);
+        //   setFullScreenLocked(false);
+        // },
+      }),
+      [setIsHovered]
+    );
+
     return (
-      <Flex style={{ border: '2px solid transparent' }} col>
+      <Flex
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+        onMouseMove={onMouseMove}
+        style={{
+          border: `2px solid ${isSelected ? '#248eff' : 'transparent'}`
+        }}
+        col
+      >
         <ErrorBoundary>
           <PanelComponent
             config={panelComponentConfig}
-            // saveConfig={saveCompleteConfig}
+            saveConfig={saveConfig}
+            isHovered={isHovered}
           />
         </ErrorBoundary>
       </Flex>

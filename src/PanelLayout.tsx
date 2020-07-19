@@ -58,7 +58,7 @@ export default function PanelLayout() {
           createNode={createTile}
           renderPreview={() => <div></div>}
         >
-          <PanelComponent />
+          <PanelComponent childId={id} />
         </MosaicWindow>
       );
     },
