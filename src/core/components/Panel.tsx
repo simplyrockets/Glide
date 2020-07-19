@@ -26,6 +26,8 @@ export type PanelComponentType<Config> =
 
 export type PanelId = string;
 
+export type PT<Config> = ComponentType<Props<Config>>;
+
 export default function Panel<Config>(
   PanelComponent: PanelComponentType<Config>
 ): ComponentType<Props<Config>> {
