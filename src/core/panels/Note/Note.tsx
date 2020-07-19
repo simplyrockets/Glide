@@ -30,7 +30,7 @@ const Note: React.FunctionComponent<Props> & PanelStatics<Config> = ({
   saveConfig
 }: Props) => {
   const onChanged = useCallback(
-    (event: any) => {
+    (event: React.ChangeEvent<HTMLTextAreaElement>) => {
       if (saveConfig) saveConfig({ noteText: event.target.value });
     },
     [saveConfig]
