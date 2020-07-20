@@ -4,7 +4,7 @@ import PanelToolbar from 'core/components/PanelToolbar';
 
 import styled from 'styled-components';
 import helpContent from './Note.help.md';
-import Panel, { PanelStatics } from 'core/components/Panel';
+import Panel, { PanelComponentType } from 'core/components/Panel';
 import { SaveConfig } from '../panels';
 
 const STextArea = styled.textarea`
@@ -25,10 +25,7 @@ type Props = {
   saveConfig?: SaveConfig<Config>;
 };
 
-const Note: React.FunctionComponent<Props> & PanelStatics<Config> = ({
-  config,
-  saveConfig
-}: Props) => {
+const Note: PanelComponentType<Config> = ({ config, saveConfig }: Props) => {
   const onChanged = useCallback(
     (event: React.ChangeEvent<HTMLTextAreaElement>) => {
       if (saveConfig) saveConfig({ noteText: event.target.value });
