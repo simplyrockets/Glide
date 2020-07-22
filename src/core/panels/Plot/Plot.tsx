@@ -9,7 +9,7 @@ type Props = {
 type Config = {};
 
 const Plot: PanelComponentType<Config> = ({ config, saveConfig }: Props) => {
-  return <></>;
+  return <>Plot goes here...</>;
 };
 Plot.panelType = 'Plot';
 Plot.defaultConfig = {};
