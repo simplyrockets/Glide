@@ -1,4 +1,4 @@
-import React, { ComponentType, useMemo } from 'react';
+import React, { ComponentType, useMemo, MemoExoticComponent } from 'react';
 import { SaveConfig } from 'core/panels/panels';
 import Flex from './Flex';
 import ErrorBoundary from 'core/components/ErrorBoundary';
@@ -104,10 +104,12 @@ export default function Panel<Config>(
     PanelComponent.displayName || PanelComponent.name || ''
   })`;
 
-  const MemoizedConnectedPanel: any = React.memo(ConnectedPanel);
+  const MemoizedConnectedPanel = React.memo(ConnectedPanel);
   // Ensure we copy over the defaultConfig and panelType props from the PanelComponent.
   // We need these in the WindowManager
+  // @ts-ignore - doesn't know underlying memoized PanelComponent's type
   MemoizedConnectedPanel.defaultConfig = PanelComponent.defaultConfig;
+  // @ts-ignore - doesn't know underlying memoized PanelComponent's type
   MemoizedConnectedPanel.panelType = PanelComponent.panelType;
 
   return MemoizedConnectedPanel;
