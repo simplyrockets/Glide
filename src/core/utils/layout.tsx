@@ -22,11 +22,6 @@ export function getPanelTypeFromId(id: PanelId): string {
   return id.split('!')[0];
 }
 
-type PanelIdMap = { [panelId: string]: string };
-type Configs = {
-  [panelId: string]: PanelConfig;
-};
-
 export const getSaveConfigsPayloadForAddedPanel = ({
   id,
   config
