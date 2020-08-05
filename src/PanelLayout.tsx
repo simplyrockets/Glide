@@ -4,7 +4,7 @@ import {
   MosaicWindow,
   MosaicZeroState,
   MosaicBranch,
-  MosaicWithoutDragDropContext
+  MosaicNode
 } from 'react-mosaic-component';
 import { getPanelTypeFromId, getPanelIdForType } from 'core/utils/layout';
 import Flex from 'core/components/Flex';
@@ -25,7 +25,7 @@ export default function PanelLayout() {
     return id;
   }, []);
 
-  const [layout] = useRecoilState(layoutState);
+  const [layout, setLayout] = useRecoilState(layoutState);
 
   const renderTile = useCallback(
     (id: string | {}, path: MosaicBranch[]): JSX.Element => {
@@ -67,7 +67,16 @@ export default function PanelLayout() {
         </MosaicWindow>
       );
     },
-    [createTile, layout]
+    [createTile]
+  );
+
+  const onChange = useCallback(
+    (newNode: string | MosaicNode<string> | null) => {
+      if (newNode !== null) {
+        setLayout(newNode);
+      }
+    },
+    [setLayout]
   );
 
   // todo change to Flex
@@ -80,6 +89,7 @@ export default function PanelLayout() {
           zeroStateView={<MosaicZeroState createNode={createTile} />}
           value={layout}
           initialValue={null}
+          onChange={onChange}
           // initialValue={{
           //   direction: 'row',
           //   first: 'Note!0',
