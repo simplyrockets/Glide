@@ -13,6 +13,8 @@ import { PanelList } from 'core/panels/PanelList/PanelList';
 
 import 'react-mosaic-component/react-mosaic-component.css';
 import './PanelLayout.scss';
+import { layoutState } from 'core/layout/layout.state';
+import { useRecoilState } from 'recoil';
 
 export default function PanelLayout() {
   const createTile = useCallback((config: any) => {
@@ -22,11 +24,13 @@ export default function PanelLayout() {
     return id;
   }, []);
 
+  const [layout] = useRecoilState(layoutState);
+
   const renderTile = useCallback(
     (id: string | {}, path: MosaicBranch[]): JSX.Element => {
       // `id` is usually a string. But when `layout` is empty, `id` will be an empty object, in which case we don't need to render Tile
       if (!id || typeof id !== 'string') {
-        return <>id not of type 'string'.</>;
+        return <></>;
       }
       const type = getPanelTypeFromId(id);
       const PanelComponent = PanelList.getComponentForType(type);
@@ -73,16 +77,18 @@ export default function PanelLayout() {
           renderTile={renderTile}
           resize={{ minimumPaneSizePercentage: 2 }}
           zeroStateView={<MosaicZeroState createNode={createTile} />}
-          initialValue={{
-            direction: 'row',
-            first: 'Note!0',
-            second: {
-              direction: 'column',
-              first: 'Note!1',
-              second: 'Note!2'
-            },
-            splitPercentage: 40
-          }}
+          value={layout}
+          initialValue={null}
+          // initialValue={{
+          //   direction: 'row',
+          //   first: 'Note!0',
+          //   second: {
+          //     direction: 'column',
+          //     first: 'Note!1',
+          //     second: 'Note!2'
+          //   },
+          //   splitPercentage: 40
+          // }}
           className="mosaic-blueprint-theme bp3-dark"
         />
       </Flex>

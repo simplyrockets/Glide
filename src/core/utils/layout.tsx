@@ -1,4 +1,11 @@
 import { PanelId } from 'core/components/Panel';
+import { MosaicNode } from 'react-mosaic-component';
+import {
+  PanelConfig,
+  SaveConfigsPayload,
+  ChangePanelLayoutPayload
+} from 'core/panels/panels';
+import { isEmpty } from 'lodash';
 
 // given a panel type, create a unique id for a panel
 // with the type embedded within the id.
@@ -14,3 +21,44 @@ export function getPanelIdForType(type: string): PanelId {
 export function getPanelTypeFromId(id: PanelId): string {
   return id.split('!')[0];
 }
+
+type PanelIdMap = { [panelId: string]: string };
+type Configs = {
+  [panelId: string]: PanelConfig;
+};
+
+export const getSaveConfigsPayloadForAddedPanel = ({
+  id,
+  config
+}: {
+  id: string;
+  config: PanelConfig;
+}): SaveConfigsPayload => {
+  return { configs: [{ id, config }] };
+};
+
+export const selectPanelOutput = (
+  type: string,
+  layout: MosaicNode<string>,
+  {
+    config
+  }: {
+    config?: PanelConfig;
+  }
+): {
+  saveConfigsPayload: SaveConfigsPayload;
+  changePanelPayload: ChangePanelLayoutPayload;
+} => {
+  const id = getPanelIdForType(type);
+  let saveConfigsPayload: SaveConfigsPayload = { configs: [] };
+  if (config) {
+    saveConfigsPayload = { configs: [{ id, config }] };
+  }
+  const changePanelPayload = {
+    layout: isEmpty(layout)
+      ? id
+      : { direction: 'row', first: id, second: layout },
+    trimSavedProps: true
+  };
+  return { saveConfigsPayload, changePanelPayload };
+};

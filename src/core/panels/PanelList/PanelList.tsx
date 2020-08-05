@@ -9,10 +9,15 @@ import {
   MenuDivider,
   Menu
 } from '@blueprintjs/core';
+import { PanelConfig } from '../panels';
 
+type PresetSettings = {
+  config: PanelConfig;
+};
 export type PanelListItem = {
   title?: string;
   component: PanelComponentType<any>;
+  presetSettings?: PresetSettings;
 };
 
 function getPanelsByCategory(): { [category: string]: PanelListItem[] } {
@@ -22,6 +27,7 @@ function getPanelsByCategory(): { [category: string]: PanelListItem[] } {
 
 export type PanelSelection = {
   type: string;
+  config?: PanelConfig;
 };
 
 type Props = {
@@ -59,23 +65,27 @@ export class PanelList extends React.Component<Props, { searchQuery: string }> {
           {categories.map(({ label, key }) => {
             let items = panelsByCategory[key];
 
-            return items.map(({ title, component }, panelIdx) => {
-              const panelType = component.panelType;
-
-              return (
-                <div key={`${panelType}-${panelIdx}`}>
-                  {panelIdx === 0 && <MenuDivider title={label} />}
-                  <MenuItem
-                    text={title}
-                    onClick={() => {
-                      onPanelSelect({
-                        type: panelType
-                      });
-                    }}
-                  />
-                </div>
-              );
-            });
+            return items.map(
+              (
+                { presetSettings, title, component: { panelType } },
+                panelIdx
+              ) => {
+                return (
+                  <div key={`${panelType}-${panelIdx}`}>
+                    {panelIdx === 0 && <MenuDivider title={label} />}
+                    <MenuItem
+                      text={title}
+                      onClick={() => {
+                        onPanelSelect({
+                          type: panelType,
+                          config: presetSettings?.config
+                        });
+                      }}
+                    />
+                  </div>
+                );
+              }
+            );
           })}
         </div>
       </Menu>
