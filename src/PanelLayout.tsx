@@ -3,7 +3,8 @@ import {
   Mosaic,
   MosaicWindow,
   MosaicZeroState,
-  MosaicBranch
+  MosaicBranch,
+  MosaicWithoutDragDropContext
 } from 'react-mosaic-component';
 import { getPanelTypeFromId, getPanelIdForType } from 'core/utils/layout';
 import Flex from 'core/components/Flex';
@@ -66,14 +67,14 @@ export default function PanelLayout() {
         </MosaicWindow>
       );
     },
-    [createTile]
+    [createTile, layout]
   );
 
   // todo change to Flex
   return (
     <ErrorBoundary>
       <Flex center style={{ width: '100%', height: '100%' }}>
-        <Mosaic
+        <Mosaic //WithoutDragDropContext
           renderTile={renderTile}
           resize={{ minimumPaneSizePercentage: 2 }}
           zeroStateView={<MosaicZeroState createNode={createTile} />}

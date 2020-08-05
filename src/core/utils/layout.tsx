@@ -52,8 +52,7 @@ export const selectPanelOutput = (
   const changePanelPayload = {
     layout: isEmpty(layout)
       ? id
-      : { direction: 'row', first: id, second: layout },
-    trimSavedProps: true
+      : { direction: 'row', first: id, second: layout }
   };
   return { saveConfigsPayload, changePanelPayload };
 };

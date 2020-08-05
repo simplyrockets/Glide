@@ -1,8 +1,8 @@
-import React, { ComponentType, useMemo } from "react";
-import { SaveConfig } from "core/panels/panels";
-import Flex from "./Flex";
-import ErrorBoundary from "core/components/ErrorBoundary";
-import { useRecoilState, atom } from "recoil";
+import React, { ComponentType, useMemo } from 'react';
+import { SaveConfig } from 'core/panels/panels';
+import Flex from './Flex';
+import ErrorBoundary from 'core/components/ErrorBoundary';
+import { useRecoilState, atom } from 'recoil';
 
 export interface PanelStatics<Config> {
   panelType: string;
@@ -35,18 +35,18 @@ export default function Panel<Config>(
     config: originalConfig,
     saveConfig
   }: Props<Config>) {
-    const hovered = atom<boolean>({
+    const hoveredState = atom<boolean>({
       key: `${childId}-hovered`,
       default: false
     });
 
-    const selected = atom<boolean>({
+    const selectedState = atom<boolean>({
       key: `${childId}-selected`,
       default: false
     });
 
-    const [isHovered, setIsHovered] = useRecoilState<boolean>(hovered);
-    const [isSelected] = useRecoilState<boolean>(selected);
+    const [isHovered, setIsHovered] = useRecoilState<boolean>(hoveredState);
+    const [isSelected] = useRecoilState<boolean>(selectedState);
 
     const config = originalConfig || {};
     const panelComponentConfig = useMemo(
@@ -58,7 +58,7 @@ export default function Panel<Config>(
     const { onMouseEnter, onMouseLeave, onMouseMove } = useMemo(
       () => ({
         onMouseEnter: () => {
-          console.log("setting hovered to true");
+          console.log('setting hovered to true');
           setIsHovered(true);
         },
         onMouseLeave: () => setIsHovered(false),
@@ -85,7 +85,7 @@ export default function Panel<Config>(
         onMouseLeave={onMouseLeave}
         onMouseMove={onMouseMove}
         style={{
-          border: `2px solid ${isSelected ? "#248eff" : "transparent"}`
+          border: `2px solid ${isSelected ? '#248eff' : 'transparent'}`
         }}
         col
       >
@@ -100,9 +100,9 @@ export default function Panel<Config>(
     );
   }
 
-  ConnectedPanel.displayName = `Panel(${PanelComponent.displayName ||
-    PanelComponent.name ||
-    ""})`;
+  ConnectedPanel.displayName = `Panel(${
+    PanelComponent.displayName || PanelComponent.name || ''
+  })`;
 
   const MemoizedConnectedPanel = React.memo(ConnectedPanel);
   // Ensure we copy over the defaultConfig and panelType props from the PanelComponent.
