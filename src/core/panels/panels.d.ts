@@ -2,7 +2,7 @@ import { MosaicNode } from 'react-mosaic-component';
 
 export type PanelConfig = { [key: string]: any };
 
-export type SaveConfig<Config> = (Config) => void;
+export type SaveConfig<Config extends PanelConfig> = (Config) => void;
 
 export type ConfigsPayload = {
   id: string;
