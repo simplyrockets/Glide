@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react';
 import ChildToggle from 'components/ChildToggle/ChildToggle';
 import { Menu, AnchorButton } from '@blueprintjs/core';
 import { IconNames } from '@blueprintjs/icons';
-import { PanelList, PanelSelection } from 'core/panels/PanelList/PanelList';
+import PanelList, { PanelSelection } from 'core/panels/PanelList/PanelList';
 import { layoutState } from 'core/layout/layout.state';
 import { selectPanelOutput } from 'core/utils/layout';
 import { useRecoilState } from 'recoil';

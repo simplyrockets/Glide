@@ -21,14 +21,14 @@ const STextArea = styled.textarea`
 
 type Config = { noteText: string };
 type Props = {
-  config?: Config;
-  saveConfig?: SaveConfig<Config>;
+  config: Config;
+  saveConfig: SaveConfig<Config>;
 };
 
 const Note: PanelComponentType<Config> = ({ config, saveConfig }: Props) => {
   const onChanged = useCallback(
     (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-      if (saveConfig) saveConfig({ noteText: event.target.value });
+      saveConfig({ noteText: event.target.value });
     },
     [saveConfig]
   );
@@ -38,7 +38,7 @@ const Note: PanelComponentType<Config> = ({ config, saveConfig }: Props) => {
       <PanelToolbar helpContent={helpContent} floating />
       <STextArea
         placeholder="Enter your notes here"
-        value={config?.noteText ?? ''}
+        value={config.noteText ?? ''}
         onChange={onChanged}
       />
     </Flex>

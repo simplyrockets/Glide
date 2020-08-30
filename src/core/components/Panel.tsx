@@ -11,15 +11,15 @@ export interface PanelStatics<Config> {
 
 type Props<Config> = {
   childId?: string;
-  config?: Config;
-  saveConfig?: (config: Config) => void;
+  config: Config;
+  saveConfig: (config: Config) => void;
 };
 
 export type PanelComponentType<Config> =
   | (ComponentType<{}> & PanelStatics<Config>)
   | (ComponentType<{
-      config?: Config;
-      saveConfig?: SaveConfig<Config>;
+      config: Config;
+      saveConfig: SaveConfig<Config>;
       isHovered?: boolean;
     }> &
       PanelStatics<Config>);

@@ -10,7 +10,7 @@ import { getPanelTypeFromId, getPanelIdForType } from 'core/utils/layout';
 import Flex from 'core/components/Flex';
 import PanelToolbar from 'core/components/PanelToolbar';
 import ErrorBoundary from 'core/components/ErrorBoundary';
-import { PanelList } from 'core/panels/PanelList/PanelList';
+import PanelList from 'core/panels/PanelList/PanelList';
 
 import 'react-mosaic-component/react-mosaic-component.css';
 import './PanelLayout.scss';
@@ -40,12 +40,11 @@ export default function PanelLayout() {
         // No component found for the given type, render the panel selector
         return (
           <MosaicWindow
-            key={path.toString()}
             title={type}
             path={path}
             createNode={createTile}
             // renderToolbar={() => <div></div>}
-            // renderPreview={(p) => <div>{p.title}</div>}
+            renderPreview={(p) => <div>{p.title}</div>}
           >
             <Flex col center>
               <PanelToolbar floating />
@@ -71,9 +70,10 @@ export default function PanelLayout() {
   );
 
   const onChange = useCallback(
-    (newNode: string | MosaicNode<string> | null) => {
-      if (newNode !== null) {
-        setLayout(newNode);
+    (newLayout: string | MosaicNode<string> | null) => {
+      if (newLayout !== null) {
+        console.log('writing new layout to recoil state');
+        setLayout(newLayout);
       }
     },
     [setLayout]

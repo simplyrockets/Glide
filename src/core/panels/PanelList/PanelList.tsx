@@ -20,8 +20,8 @@ export type PanelListItem = {
   presetSettings?: PresetSettings;
 };
 
-function getPanelsByCategory(): { [category: string]: PanelListItem[] } {
-  const panelsByCategory: any = pbc();
+function getPanelsByCategory(): { [category: string]: Array<PanelListItem> } {
+  const panelsByCategory = pbc();
   return panelsByCategory;
 }
 
@@ -34,7 +34,7 @@ type Props = {
   onPanelSelect: (selection: PanelSelection) => void;
 };
 
-export class PanelList extends React.Component<Props, { searchQuery: string }> {
+class PanelList extends React.Component<Props, { searchQuery: string }> {
   static getComponentForType(type: string): PT<any> | void {
     const panelsByCategory = getPanelsByCategory();
     const allPanels = flatten(
@@ -92,3 +92,6 @@ export class PanelList extends React.Component<Props, { searchQuery: string }> {
     );
   }
 }
+
+// TODO: Want to inject 'config' and 'saveConfig' on Props type here, so they are generally available in all panel types.
+export default PanelList;
