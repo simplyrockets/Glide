@@ -17,6 +17,8 @@ import './PanelLayout.scss';
 import { layoutState } from 'core/layout/layout.state';
 import { useRecoilState } from 'recoil';
 
+const EMPTY_CONFIG = Object.freeze({});
+
 export default function PanelLayout() {
   const createTile = useCallback((config: any) => {
     const defaultPanelType = 'Note';
@@ -62,7 +64,7 @@ export default function PanelLayout() {
           createNode={createTile}
           renderPreview={() => <div></div>}
         >
-          <PanelComponent childId={id} />
+          <PanelComponent saveConfig={(c: any) => {}} config={EMPTY_CONFIG} />
         </MosaicWindow>
       );
     },

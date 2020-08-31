@@ -1,4 +1,4 @@
-import React, { ComponentType, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { SaveConfig } from 'core/panels/panels';
 import Flex from './Flex';
 import ErrorBoundary from 'core/components/ErrorBoundary';
@@ -11,25 +11,25 @@ export interface PanelStatics<Config> {
 
 type Props<Config> = {
   childId?: string;
-  config: Config;
-  saveConfig: (config: Config) => void;
+  config?: Config;
+  saveConfig?: (config: Config) => void;
 };
 
-export type PanelComponentType<Config> =
-  | (ComponentType<{}> & PanelStatics<Config>)
-  | (ComponentType<{
+export type PanelComponentType<Config> = (
+  | React.ComponentType<{}>
+  | React.ComponentType<{
       config: Config;
       saveConfig: SaveConfig<Config>;
       isHovered?: boolean;
-    }> &
-      PanelStatics<Config>);
+    }>
+) &
+  PanelStatics<Config>;
 
 export type PanelId = string;
-export type PT<Config> = ComponentType<Props<Config>>;
 
 export default function Panel<Config>(
   PanelComponent: PanelComponentType<Config>
-): ComponentType<Props<Config>> {
+): React.ComponentType<Props<Config>> {
   function ConnectedPanel({
     childId,
     config: originalConfig,
@@ -92,7 +92,7 @@ export default function Panel<Config>(
         <ErrorBoundary>
           <PanelComponent
             config={panelComponentConfig}
-            saveConfig={saveConfig}
+            saveConfig={saveConfig!}
             isHovered={isHovered}
           />
         </ErrorBoundary>

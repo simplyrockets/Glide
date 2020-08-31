@@ -10,7 +10,11 @@ type Props = {
 };
 
 const Map: PanelComponentType<Config> = ({ config, saveConfig }: Props) => {
-  return <Flex col style={{ height: '100%' }}></Flex>;
+  return (
+    <Flex col style={{ height: '100%' }}>
+      map goes here..
+    </Flex>
+  );
 };
 Map.panelType = 'Map';
 Map.defaultConfig = {
