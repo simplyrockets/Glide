@@ -21,13 +21,9 @@ const AppMenu = (props: Props) => {
     ({ type, config }: PanelSelection) => {
       console.log('panel selected: ', type);
 
-      const { changePanelPayload, saveConfigsPayload } = selectPanelOutput(
-        type,
-        layout,
-        {
-          config
-        }
-      );
+      const { changePanelPayload } = selectPanelOutput(type, layout, {
+        config
+      });
       setLayout(changePanelPayload.layout);
     },
     [layout, setLayout]
