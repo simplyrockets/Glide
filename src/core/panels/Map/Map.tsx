@@ -13,8 +13,6 @@ type Props = {
 
 const Map: PanelComponentType<Config> = ({ config, saveConfig }: Props) => {
   const [viewport, setViewport] = useState({
-    width: 400,
-    height: 400,
     latitude: 37.7577,
     longitude: -122.4376,
     zoom: 8
@@ -23,9 +21,12 @@ const Map: PanelComponentType<Config> = ({ config, saveConfig }: Props) => {
   return (
     <Flex col style={{ height: '100%' }}>
       <ReactMapGL
+        width="100%"
+        height="100%"
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESSKEY}
         {...viewport}
         onViewportChange={(nextViewport) => setViewport(nextViewport)}
+        reuseMaps
       />
     </Flex>
   );
