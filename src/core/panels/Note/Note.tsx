@@ -15,7 +15,7 @@ const STextArea = styled.textarea`
   margin: 0;
   padding: 4px 6px;
   &:focus {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.01);
   }
 `;
 
